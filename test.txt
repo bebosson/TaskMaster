@@ -1,0 +1,113 @@
+This shell must at least allow the user to:
+• See the status of all the programs described in the config file ("status" command)
+• Start / stop / restart programs
+• Reload the configuration file without stopping the main program
+• Stop the main program
+
+
+
+The configuration file must allow the user to specify the following, for each program
+that is to be supervised:
+• The command to use to launch the program
+    command=/BINDIR/exec
+• The number of processes to start and keep running
+    numprocs=2
+• Whether to start this program at launch or not
+    autostart=bool
+• Whether the program should be restarted always, never, or on unexpected exits only
+    autorestart= true | unexpected | false
+• Which return codes represent an "expected" exit status
+    exitcodes=
+• How long the program should be running after it’s started for it to be considered
+"successfully started"
+    startsecs=
+• How many times a restart should be attempted before aborting
+    startretries= 
+• Which signal should be used to stop (i.e. exit gracefully) the program
+    stopsignal= TERM, HUP, INT, QUIT, KILL, USR1
+• How long to wait after a graceful stop before killing the program
+    stopwaitsecs=
+• Options to discard the program’s stdout/stderr or to redirect them to files
+redirect_stderr= true | false (redirect the stderr to stdout)
+redirect_stdout= true | false (redirect the stdout to stderr)
+stdout_logfile=/path/to/stdout 
+stderr_logfile=/path/to/stderr
+redirect stdout seems to not working, if redirect_stderr is on, don't create the corresponging log file 
+• Environment variables to set before launching the program
+environment= !!! 
+• A working directory to set before launching the program
+directory=
+• An umask to set before launching the program
+umask=
+
+
+
+Process States¶
+
+A process controlled by supervisord will be in one of the below states at any given time. You may see these state names in various user interface elements in clients.
+
+STOPPED (0)
+
+    The process has been stopped due to a stop request or has never been started.
+
+STARTING (10)
+
+    The process is starting due to a start request.
+
+RUNNING (20)
+
+    The process is running.
+
+BACKOFF (30)
+
+    The process entered the STARTING state but subsequently exited too quickly (before the time defined in startsecs) to move to the RUNNING state.
+
+STOPPING (40)
+
+    The process is stopping due to a stop request.
+
+EXITED (100)
+
+    The process exited from the RUNNING state (expectedly or unexpectedly).
+
+FATAL (200)
+
+    The process could not be started successfully.
+
+UNKNOWN (1000)
+
+    The process is in an unknown state (supervisord programming error).
+
+Each process run under supervisor progresses through these states as per the following directed graph.
+
+
+
+Default Parse
+
+command= No Default R= Yes
+numprocs=1 R = No
+autostart=true R = No
+autorestart= unexpected
+exitcodes= 0 R = No 
+startsecs= 1 R = No
+startretries= 3 default = 3
+stopsignal= TERM R = No
+stopwaitsecs= 10
+redirect_stderr= No
+redirect_stdout= No
+stdout_logfile=Auto 
+stderr_logfile=Auto
+environment= No extra env (if wrong => taskmaster crash)
+directory= No chdir
+umask= 022
+every invalid input on conf field is crashing taskmaster
+
+
+Loop execution: 
+->add nb restart in struct Proc
+->changing state function
+
+Add 2 types of thread:
+-> the 2 thread for the communication between the client and the server 
+(do we need one thread by process ?? if we need to add one second by try, we must not stop the server process the time of the wait...)
+

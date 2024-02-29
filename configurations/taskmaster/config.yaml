@@ -1,0 +1,122 @@
+programs:
+  # - name: tail_1
+  #   command: tail -f /dev/null
+  #   numprocs: 2
+  #   autostart: true
+  #   autorestart: false
+  # - name: nginx
+  #   command: /usr/sbin/nginx
+  #   numprocs: 2
+  #   umask: 022
+  #   directory: /tmp
+  #   autostart: true
+  #   autorestart: false
+  #   exitcodes:
+  #     - 0
+  #     - -1
+  #   startretries: 3
+  #   starttime: 5
+  #   stopsignal: TERM
+  #   stoptime: 10
+  #   environment:
+  #     STARTED_BY: taskmaster
+  #     ANSWER: 42
+  #   stdout: /tmp/nginx.out
+  #   stderr: /tmp/nginx.err
+  - name : proc
+    command: tail -f /dev/null
+    numprocs: 5
+    autostart: true
+    autorestart: unexpected
+    exitcodes:
+      - 0
+      - 1
+    stopsignal: TERM
+    starttime: 10
+    stdout: /tmp/tail.stdout
+    stderr: /tmp/tail.stderr
+  # - name: top
+  #   command: /usr/bin/top
+  #   numprocs: 1
+  #   umask: 022
+  #   directory: /tmp
+  #   autostart: true
+  #   autorestart: false
+  #   # startsecs: bonjour
+  #   exitcodes:
+  #     - 0
+  #     - -1
+  #   startretries: 3
+  #   starttime: 5
+  #   stopsignal: TERM
+  #   stoptime: 10
+  #   environment:
+  #     STARTED_BY: taskmaster
+  #     ANSWER: 42
+  #   stdout: /tmp/top.out
+  #   stderr: /tmp/top.err
+    
+  # - name : script
+  #   command: "./script"
+  #   numprocs: 1
+  #   umask: 077
+  #   directory: /tmp
+  #   autostart: true
+  #   autorestart: unexpected
+  #   exitcodes: 0
+  #   startretries: 3
+  #   starttime: 5
+  #   stopsignal: USR1
+  #   stoptime: 10
+    # stdout: /tmp/vgsworker.stdout
+    # stderr: /tmp/vgsworker.stderr
+  # - name : vim
+  #   command: "/usr/bin/vim"
+  #   numprocs: 1
+  #   umask: 077
+  #   directory: /tmp
+  #   autostart: true
+  #   autorestart: unexpected
+  #   exitcodes: 0
+  #   startretries: 3
+  #   starttime: 5
+  #   stopsignal: USR1
+  #   stoptime: 10
+  # - name: id
+  #   command: /usr/bin/id root
+  #   numprocs: 1
+  #   umask: 022
+  #   directory: /tmp
+  #   autostart: true
+  #   autorestart: true
+  #   # startsecs: bonjour
+  #   exitcodes:
+  #     - 0
+  #     - -1
+  #   startretries: 3
+  #   starttime: 5
+  #   stopsignal: TERM
+  #   stoptime: 10
+  #   stdout: /tmp/vim.stdout
+  #   stderr: /tmp/vim.stderr
+  # - name: id
+  #   command: /usr/bin/id root
+  #   numprocs: 1
+  #   umask: 022
+  #   directory: /tmp
+  #   autostart: true
+  #   autorestart: true
+  #   # startsecs: bonjour
+  #   exitcodes:
+  #     - 0
+  #     - -1
+  #   startretries: 3
+  #   starttime: 5
+  #   stopsignal: TERM
+  #   stoptime: 10
+  #   environment:
+  #     STARTED_BY: taskmaster
+  #     ANSWER: 42
+  #   stdout: /tmp/top.out
+  #   stderr: /tmp/top.err
+  

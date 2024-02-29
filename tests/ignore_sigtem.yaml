@@ -1,0 +1,8 @@
+programs:
+  - name : exe
+    command : python3 ./tests/procs/ignore_sigterm.py
+    autostart : true
+    autorestart : false
+    startsecs : 0
+    stopsignal : TERM
+    stopwaitsecs : 10

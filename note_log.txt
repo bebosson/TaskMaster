@@ -1,0 +1,16 @@
+log: date+statut:+description
+---> taskmaster initialized + pid
+---> spawned: la command est spawn: on precise le nom + pid
+---> exited: le child a quit: return nom + status exit (compare with the exit .conf)
+---> success: le child stayed up > au temps dans .conf
+---> stopped: name + signal
+---> spawnerr: can't find command 'nom_command'
+---> gave up: too many retry
+
+need:
+---> impl autorestart (as a loop of actualize_status ?)
+---> exitedcodes:
+---> startsecs:
+---> startretries:
+---> stopwaitsecs ???
+---> umask ????????
